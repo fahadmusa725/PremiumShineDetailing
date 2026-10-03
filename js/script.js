@@ -645,8 +645,6 @@ const templateParams = {
     message: message
 };
 
-console.log(templateParams);
-
 /*==========================
       SEND EMAIL
 ==========================*/
@@ -693,7 +691,7 @@ button.innerHTML=originalText;
 
 .catch(function(error){
 
-console.log(error);
+console.error(error);
 
 Swal.fire({
 
@@ -773,5 +771,3 @@ showConfirmButton:false
 /*==========================
       SUCCESS
 ==========================*/
-
-console.log("Premium Shine Detailing Loaded Successfully");
