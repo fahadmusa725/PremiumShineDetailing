@@ -16,7 +16,7 @@ A professional mobile car detailing website built for Premium Shine Detailing.
 
 ## Live Website
 
-https://premiumshinedetailing.netlify.app/
+[https://premiumshinedetailing.vercel.app](https://premiumshinedetailing.vercel.app)
 
 ## Technologies
 
