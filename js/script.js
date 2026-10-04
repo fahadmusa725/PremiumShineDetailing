@@ -1,13 +1,4 @@
-/*=====================================================
-        PREMIUM SHINE DETAILING
-        script.js Part-1
-======================================================*/
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    /*==================================
-            NAVBAR SCROLL
-    ==================================*/
 
     const navbar = document.querySelector(".navbar");
 
@@ -24,10 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
-
-    /*==================================
-        SMOOTH SCROLL
-    ==================================*/
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
@@ -51,9 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /*==================================
-        MOBILE MENU CLOSE
-    ==================================*/
+
 
     document.querySelectorAll(".navbar .nav-link").forEach(link => {
 
@@ -71,9 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /*==================================
-        ACTIVE NAV LINK
-    ==================================*/
+
 
     const sections = document.querySelectorAll("section");
 
@@ -109,9 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /*==================================
-        LIVE PRICE CALCULATOR
-    ==================================*/
 
     const service = document.getElementById("serviceSelect");
 
@@ -162,10 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /*==================================
-        BACK TO TOP
-    ==================================*/
-
     const backTop = document.querySelector(".back-top");
 
     window.addEventListener("scroll", () => {
@@ -196,9 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /*==================================
-        SCROLL PROGRESS
-    ==================================*/
+
 
     const progressBar = document.querySelector(".progress-bar-scroll");
 
@@ -215,9 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /*==================================
-        FADE-UP EFFECT
-    ==================================*/
+
 
     const observer = new IntersectionObserver(entries => {
 
@@ -240,534 +212,416 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-/*=====================================================
-        PREMIUM SHINE DETAILING
-        script.js Part-2
-======================================================*/
-
-
-/*==========================================
-            PRELOADER
-==========================================*/
 
 window.addEventListener("load", () => {
 
     const preloader = document.getElementById("preloader");
 
-    if(preloader){
+    if (preloader) {
 
         preloader.style.opacity = "0";
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
             preloader.style.display = "none";
 
-        },600);
+        }, 600);
 
     }
 
 });
 
-
-/*==========================================
-            CUSTOM CURSOR
-==========================================*/
-
 const cursor = document.querySelector(".cursor");
 const dot = document.querySelector(".cursor-dot");
 
-if(cursor && dot){
+if (cursor && dot) {
 
-document.addEventListener("mousemove",(e)=>{
+    document.addEventListener("mousemove", (e) => {
 
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
 
-dot.style.left=e.clientX+"px";
-dot.style.top=e.clientY+"px";
+        dot.style.left = e.clientX + "px";
+        dot.style.top = e.clientY + "px";
+
+    });
+
+    document.querySelectorAll("a,button,.btn,.gallery-card,.why-card,.addon-card").forEach(item => {
+
+        item.addEventListener("mouseenter", () => {
+
+            cursor.style.transform = "translate(-50%,-50%) scale(1.8)";
+            cursor.style.borderColor = "#FFD700";
+
+        });
+
+        item.addEventListener("mouseleave", () => {
+
+            cursor.style.transform = "translate(-50%,-50%) scale(1)";
+
+        });
+
+    });
+
+}
+const hero = document.querySelector(".hero");
+
+window.addEventListener("scroll", () => {
+
+    let offset = window.pageYOffset;
+
+    if (hero) {
+
+        hero.style.backgroundPositionY = offset * 0.4 + "px";
+
+    }
 
 });
 
-document.querySelectorAll("a,button,.btn,.gallery-card,.why-card,.addon-card").forEach(item=>{
+const counters = document.querySelectorAll(".counter");
 
-item.addEventListener("mouseenter",()=>{
+const speed = 40;
 
-cursor.style.transform="translate(-50%,-50%) scale(1.8)";
-cursor.style.borderColor="#FFD700";
+counters.forEach(counter => {
+
+    const update = () => {
+
+        const target = +counter.getAttribute("data-target");
+
+        const count = +counter.innerText;
+
+        const increment = target / speed;
+
+        if (count < target) {
+
+            counter.innerText = Math.ceil(count + increment);
+
+            setTimeout(update, 30);
+
+        }
+
+        else {
+
+            counter.innerText = target;
+
+        }
+
+    };
+
+    update();
 
 });
 
-item.addEventListener("mouseleave",()=>{
+document.querySelectorAll(".btn").forEach(button => {
 
-cursor.style.transform="translate(-50%,-50%) scale(1)";
+    button.addEventListener("click", function (e) {
+
+        let ripple = document.createElement("span");
+
+        ripple.classList.add("ripple");
+
+        this.appendChild(ripple);
+
+        let x = e.clientX - this.offsetLeft;
+
+        let y = e.clientY - this.offsetTop;
+
+        ripple.style.left = x + "px";
+
+        ripple.style.top = y + "px";
+
+        setTimeout(() => {
+
+            ripple.remove();
+
+        }, 600);
+
+    });
 
 });
 
-});
+const year = document.getElementById("year");
+
+if (year) {
+
+    year.innerHTML = new Date().getFullYear();
 
 }
 
+const logo = document.querySelector(".logo-circle");
 
-/*==========================================
-        HERO PARALLAX
-==========================================*/
+let angle = 0;
 
-const hero=document.querySelector(".hero");
+function floatingLogo() {
 
-window.addEventListener("scroll",()=>{
+    angle += 0.02;
 
-let offset=window.pageYOffset;
+    if (logo) {
 
-if(hero){
+        logo.style.transform = `translateY(${Math.sin(angle) * 10}px)`;
 
-hero.style.backgroundPositionY=offset*0.4+"px";
+    }
 
-}
-
-});
-
-
-/*==========================================
-        COUNTER
-==========================================*/
-
-const counters=document.querySelectorAll(".counter");
-
-const speed=40;
-
-counters.forEach(counter=>{
-
-const update=()=>{
-
-const target=+counter.getAttribute("data-target");
-
-const count=+counter.innerText;
-
-const increment=target/speed;
-
-if(count<target){
-
-counter.innerText=Math.ceil(count+increment);
-
-setTimeout(update,30);
-
-}
-
-else{
-
-counter.innerText=target;
-
-}
-
-};
-
-update();
-
-});
-
-
-/*==========================================
-        BUTTON RIPPLE
-==========================================*/
-
-document.querySelectorAll(".btn").forEach(button=>{
-
-button.addEventListener("click",function(e){
-
-let ripple=document.createElement("span");
-
-ripple.classList.add("ripple");
-
-this.appendChild(ripple);
-
-let x=e.clientX-this.offsetLeft;
-
-let y=e.clientY-this.offsetTop;
-
-ripple.style.left=x+"px";
-
-ripple.style.top=y+"px";
-
-setTimeout(()=>{
-
-ripple.remove();
-
-},600);
-
-});
-
-});
-
-
-/*==========================================
-        AUTO YEAR
-==========================================*/
-
-const year=document.getElementById("year");
-
-if(year){
-
-year.innerHTML=new Date().getFullYear();
-
-}
-
-
-/*==========================================
-        FLOATING HERO LOGO
-==========================================*/
-
-const logo=document.querySelector(".logo-circle");
-
-let angle=0;
-
-function floatingLogo(){
-
-angle+=0.02;
-
-if(logo){
-
-logo.style.transform=`translateY(${Math.sin(angle)*10}px)`;
-
-}
-
-requestAnimationFrame(floatingLogo);
+    requestAnimationFrame(floatingLogo);
 
 }
 
 floatingLogo();
 
+if (typeof AOS !== "undefined") {
 
-/*==========================================
-        AOS
-==========================================*/
+    AOS.init({
 
-if(typeof AOS!=="undefined"){
+        duration: 1000,
 
-AOS.init({
+        once: true,
 
-duration:1000,
+        offset: 80,
 
-once:true,
+        easing: "ease-in-out"
 
-offset:80,
-
-easing:"ease-in-out"
-
-});
+    });
 
 }
 
+document.querySelectorAll(".gallery-card").forEach(card => {
 
-/*==========================================
-        IMAGE HOVER TILT
-==========================================*/
+    card.addEventListener("mousemove", (e) => {
 
-document.querySelectorAll(".gallery-card").forEach(card=>{
+        const rect = card.getBoundingClientRect();
 
-card.addEventListener("mousemove",(e)=>{
+        const x = e.clientX - rect.left;
 
-const rect=card.getBoundingClientRect();
+        const y = e.clientY - rect.top;
 
-const x=e.clientX-rect.left;
+        const rotateX = ((y / rect.height) - 0.5) * 12;
 
-const y=e.clientY-rect.top;
+        const rotateY = ((x / rect.width) - 0.5) * -12;
 
-const rotateX=((y/rect.height)-0.5)*12;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
 
-const rotateY=((x/rect.width)-0.5)*-12;
+    });
 
-card.style.transform=`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+    card.addEventListener("mouseleave", () => {
 
-});
+        card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
 
-card.addEventListener("mouseleave",()=>{
-
-card.style.transform="perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+    });
 
 });
 
-});
+const reveals = document.querySelectorAll(".section-heading");
 
+window.addEventListener("scroll", () => {
 
-/*==========================================
-        TEXT REVEAL
-==========================================*/
+    reveals.forEach(section => {
 
-const reveals=document.querySelectorAll(".section-heading");
+        const top = section.getBoundingClientRect().top;
 
-window.addEventListener("scroll",()=>{
+        const visible = window.innerHeight - 120;
 
-reveals.forEach(section=>{
+        if (top < visible) {
 
-const top=section.getBoundingClientRect().top;
+            section.classList.add("show");
 
-const visible=window.innerHeight-120;
+        }
 
-if(top<visible){
-
-section.classList.add("show");
-
-}
+    });
 
 });
-
-});
-
-
-/*==========================================
-        CONSOLE MESSAGE 😎
-==========================================*/
-
-console.log("%cPremium Shine Detailing",
-"font-size:28px;font-weight:bold;color:#D4AF37;");
-
-console.log("%cDesigned with ❤️",
-"font-size:16px;color:white;");
-/*=====================================================
-        PREMIUM SHINE DETAILING
-        SCRIPT PART-3
-======================================================*/
-
-
-/*==========================
-      EMAIL JS INIT
-==========================*/
 
 emailjs.init("gLyJbafFFXuiaTlMG");
 
 
-/*==========================
-      BOOKING FORM
-==========================*/
-
 const bookingForm = document.getElementById("bookingForm");
 
-if(bookingForm){
+if (bookingForm) {
 
-bookingForm.addEventListener("submit",function(e){
+    bookingForm.addEventListener("submit", function (e) {
 
-e.preventDefault();
-
-
-const button=this.querySelector("button");
-
-const originalText=button.innerHTML;
-
-button.disabled=true;
-
-button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+        e.preventDefault();
 
 
-/*==========================
-      GET VALUES
-==========================*/
+        const button = this.querySelector("button");
 
-const fullName=this.querySelector('input[placeholder="Full Name"]').value;
+        const originalText = button.innerHTML;
 
-const phone=this.querySelector('input[placeholder="Cell Phone"]').value;
+        button.disabled = true;
 
-const email=this.querySelector('input[type="email"]').value;
+        button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
-const car=this.querySelector('input[placeholder="Car Model"]').value;
+        const fullName = this.querySelector('input[placeholder="Full Name"]').value;
 
-const address=this.querySelector('input[placeholder="Address"]').value;
+        const phone = this.querySelector('input[placeholder="Cell Phone"]').value;
 
-const service=document.getElementById("serviceSelect");
+        const email = this.querySelector('input[type="email"]').value;
 
-const serviceName=service.options[service.selectedIndex].text;
+        const car = this.querySelector('input[placeholder="Car Model"]').value;
 
-const message=this.querySelector("textarea").value;
+        const address = this.querySelector('input[placeholder="Address"]').value;
 
-const total=document.getElementById("estimatedTotal").innerText;
+        const service = document.getElementById("serviceSelect");
+
+        const serviceName = service.options[service.selectedIndex].text;
+
+        const message = this.querySelector("textarea").value;
+
+        const total = document.getElementById("estimatedTotal").innerText;
+
+        let addons = [];
+
+        document.querySelectorAll(".addon").forEach(item => {
+
+            if (item.checked) {
+
+                addons.push(item.parentElement.innerText.trim());
+
+            }
+
+        });
+
+        if (addons.length === 0) {
+
+            addons.push("None");
+
+        }
+
+        if (fullName === "" || phone === "") {
+
+            Swal.fire({
+
+                icon: "warning",
+
+                title: "Required Fields Missing",
+
+                text: "Please enter your Name and Phone Number."
+
+            });
+
+            button.disabled = false;
+
+            button.innerHTML = originalText;
+
+            return;
+
+        }
+
+        const templateParams = {
+            customer_name: fullName,
+            phone: phone,
+            email: email,
+            car_model: car,
+            address: address,
+            service: serviceName,
+            addons: addons.join(", "),
+            total: total,
+            message: message
+        };
+
+        emailjs.send(
+
+            "premium@123",
+
+            "template_cofhf7s",
+
+            templateParams
+
+        )
+
+            .then(function () {
 
 
-/*==========================
-      ADDONS
-==========================*/
+                Swal.fire({
 
-let addons=[];
+                    icon: "success",
 
-document.querySelectorAll(".addon").forEach(item=>{
+                    title: "Appointment Sent!",
 
-if(item.checked){
+                    text: "Thank you! We will contact you shortly.",
 
-addons.push(item.parentElement.innerText.trim());
+                    confirmButtonColor: "#D4AF37"
+
+                });
+
+
+                bookingForm.reset();
+
+                document.getElementById("estimatedTotal").innerHTML = "$0";
+
+                document.getElementById("selectedService").innerHTML = "None";
+
+
+                button.disabled = false;
+
+                button.innerHTML = originalText;
+
+
+            })
+
+            .catch(function (error) {
+
+                console.error(error);
+
+                Swal.fire({
+
+                    icon: "error",
+
+                    title: "Oops!",
+
+                    text: "Something went wrong. Please try again."
+
+                });
+
+
+                button.disabled = false;
+
+                button.innerHTML = originalText;
+
+            });
+
+
+    });
 
 }
 
-});
+const whatsapp = document.querySelector(".whatsapp-btn");
 
-if(addons.length===0){
+if (whatsapp) {
 
-addons.push("None");
+    whatsapp.addEventListener("click", () => {
 
-}
+        window.open(
 
+            "https://wa.me/YOURNUMBER",
 
-/*==========================
-      VALIDATION
-==========================*/
+            "_blank"
 
-if(fullName==="" || phone===""){
+        );
 
-Swal.fire({
-
-icon:"warning",
-
-title:"Required Fields Missing",
-
-text:"Please enter your Name and Phone Number."
-
-});
-
-button.disabled=false;
-
-button.innerHTML=originalText;
-
-return;
+    });
 
 }
 
+const phoneCopy = document.querySelector(".copy-phone");
 
-/*==========================
-      EMAIL PARAMS
-==========================*/
+if (phoneCopy) {
 
-const templateParams = {
-    customer_name: fullName,
-    phone: phone,
-    email: email,
-    car_model: car,
-    address: address,
-    service: serviceName,
-    addons: addons.join(", "),
-    total: total,
-    message: message
-};
+    phoneCopy.addEventListener("click", () => {
 
-/*==========================
-      SEND EMAIL
-==========================*/
+        navigator.clipboard.writeText(phoneCopy.innerText);
 
-emailjs.send(
+        Swal.fire({
 
-"premium@123",
+            icon: "success",
 
-"template_cofhf7s",
+            title: "Copied!",
 
-templateParams
+            timer: 1200,
 
-)
+            showConfirmButton: false
 
-.then(function(){
+        });
 
-
-Swal.fire({
-
-icon:"success",
-
-title:"Appointment Sent!",
-
-text:"Thank you! We will contact you shortly.",
-
-confirmButtonColor:"#D4AF37"
-
-});
-
-
-bookingForm.reset();
-
-document.getElementById("estimatedTotal").innerHTML="$0";
-
-document.getElementById("selectedService").innerHTML="None";
-
-
-button.disabled=false;
-
-button.innerHTML=originalText;
-
-
-})
-
-.catch(function(error){
-
-console.error(error);
-
-Swal.fire({
-
-icon:"error",
-
-title:"Oops!",
-
-text:"Something went wrong. Please try again."
-
-});
-
-
-button.disabled=false;
-
-button.innerHTML=originalText;
-
-});
-
-
-});
+    });
 
 }
-
-
-/*==========================
-      WHATSAPP BUTTON
-==========================*/
-
-const whatsapp=document.querySelector(".whatsapp-btn");
-
-if(whatsapp){
-
-whatsapp.addEventListener("click",()=>{
-
-window.open(
-
-"https://wa.me/YOURNUMBER",
-
-"_blank"
-
-);
-
-});
-
-}
-
-
-/*==========================
-      COPY PHONE
-==========================*/
-
-const phoneCopy=document.querySelector(".copy-phone");
-
-if(phoneCopy){
-
-phoneCopy.addEventListener("click",()=>{
-
-navigator.clipboard.writeText(phoneCopy.innerText);
-
-Swal.fire({
-
-icon:"success",
-
-title:"Copied!",
-
-timer:1200,
-
-showConfirmButton:false
-
-});
-
-});
-
-}
-
-
-/*==========================
-      SUCCESS
-==========================*/
